@@ -1,0 +1,34 @@
+<div *ngIf="items?.length > 0; else noItems">
+    <ul *ngFor="let item of items" class="collection">
+        <li (dblclick)="deleteItem($event,item)" class="collection-item">{{item.title}}:{{item.description}}
+            <a href="#" class="secondary-content">
+                <i (click)="editItem($event,item)" class="material-icons">create</i>
+                <i   *ngIf="editState && itemToEdit.id===item.id" (click)="clearState()" class="material-icons">keyboard_arrow_up</i>
+            </a>
+
+            <div *ngIf="editState && itemToEdit.id===item.id">
+                <div class="row">
+                    <form (ngSubmit)="updateItem(item)" class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">title</i>
+                                <input id="icon_prefix" type="text" class="validate" name="title" [(ngModel)]="item.title">
+                            </div>
+                            <div class="input-field col s6">
+                                <i class="material-icons prefix">description</i>
+                                <input type="text" class="validate" name='description' [(ngModel)]="item.description">
+                            </div>
+                        </div>
+                        <input type="submit" class="waves-effect waves-light btn" value="Update item" class="btn orange">
+                        <button class="btn red" (dblclick)="deleteItem($event,item)">Delete Item</button>
+                    </form>
+                </div>
+            </div>
+        </li>
+
+    </ul>
+</div>
+
+<ng-template #noItems>
+    <h1>No Items</h1>
+</ng-template>
