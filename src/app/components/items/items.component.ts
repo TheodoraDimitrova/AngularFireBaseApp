@@ -23,6 +23,7 @@ export class ItemsComponent implements OnInit {
   deleteItem(event, item:Item) {
     this.clearState()
     this.itemService.deleteItem(item);
+    
   }
 
   editItem(event, item:Item) {

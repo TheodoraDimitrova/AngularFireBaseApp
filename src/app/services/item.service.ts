@@ -20,7 +20,8 @@ export class ItemService {
 
 
   constructor(public afs: AngularFirestore) {
-   this.itemsCollection=this.afs.collection('items',ref=>ref.orderBy('title','asc'))//sort set collection
+   this.itemsCollection=
+   this.afs.collection('items',ref=>ref.orderBy('title','asc'))//sort set collection
 
     this.items = this.itemsCollection
       .snapshotChanges().pipe(
@@ -45,6 +46,7 @@ export class ItemService {
   }
  deleteItem(item:Item){
      this.itemDoc=this.afs.doc(`items/${item.id}`)
+     console.log(`items/${item.id}`)
      this.itemDoc.delete()
   } 
   updateItem(item:Item){
